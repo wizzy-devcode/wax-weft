@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wax &amp; Weft — Print Your Own Ankara</title>
+<meta name="description" content="Pick a motif, choose your colours, and print six yards of Ankara fabric that's only yours. A print studio concept.">
+<meta name="theme-color" content="#ffd23f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%232340b5'/%3E%3Ccircle cx='16' cy='16' r='10' fill='%23ff4f8b'/%3E%3Ccircle cx='16' cy='16' r='4.5' fill='%23ffd23f'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font-family: 'Figtree', system-ui, sans-serif; color: #1a1530; background: #fff8ef; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid #2340b5; outline-offset: 3px; }
+  .wrap { max-width: 1200px; margin: 0 auto; }
+  .syne { font-family: 'Syne', system-ui, sans-serif; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 54px; padding: 0 28px; border-radius: 999px; border: 0; font: 700 17px/1 'Figtree', system-ui, sans-serif; text-decoration: none; cursor: pointer; transition: transform .15s ease; }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-ink { background: #1a1530; color: #fff; }
+  .btn-ink-yellow { background: #1a1530; color: #ffd23f; }
+  .h2 { margin: 0; font-family: 'Syne', system-ui, sans-serif; font-weight: 800; font-size: clamp(44px, 6vw, 76px); line-height: .95; letter-spacing: -.04em; }
+
+  /* Hero */
+  .hero { background: #ffd23f; padding: 24px 4vw 0; overflow: hidden; }
+  .topbar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; }
+  .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: 'Syne', system-ui, sans-serif; font-weight: 800; font-size: 26px; letter-spacing: -.02em; }
+  .nav { display: flex; flex-wrap: wrap; align-items: center; gap: 28px; font-size: 16px; font-weight: 600; }
+  .nav a { text-decoration: none; }
+  .nav a:not(.btn):hover { text-decoration: underline; }
+  .nav .btn { min-height: 44px; padding: 0 20px; font-size: 16px; }
+  .hero-row { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 32px; padding: 56px 0 52px; }
+  h1 { flex: 1 1 620px; min-width: 0; margin: 0; font-family: 'Syne', system-ui, sans-serif; font-weight: 800; font-size: clamp(56px, 8.4vw, 124px); line-height: .98; letter-spacing: -.045em; }
+  .hl { display: inline-block; padding: 0 .14em; border-radius: .18em; }
+  .hl-pink { background: #ff4f8b; transform: rotate(-2deg); }
+  .hl-blue { background: #2340b5; color: #ffd23f; transform: rotate(1.5deg); margin-top: .08em; }
+  .hero-copy { flex: 1 1 320px; display: flex; flex-direction: column; align-items: flex-start; gap: 22px; }
+  .hero-copy p { margin: 0; font-size: 21px; line-height: 1.45; max-width: 420px; text-wrap: pretty; }
+  .ribbon { display: flex; margin: 0 -4vw; overflow: hidden; border-top: 4px solid #1a1530; }
+  .ribbon, .swatch { transition: background-color .4s ease; }
+  .ribbon .tile { flex: 0 0 96px; height: 96px; }
+
+  /* Tiles (shared by ribbon, swatch and previews) */
+  /* The tiny overscale lets neighbouring tiles overlap, so no hairline seams show between them. */
+  .tile { background: var(--g); transform: rotate(var(--r)) scale(1.015); transition: background-color .4s ease; }
+  .tile svg, .pv svg { display: block; width: 100%; height: 100%; }
+
+  /* Studio */
+  .studio { padding: 96px 4vw 104px; }
+  .studio-inner { display: flex; flex-direction: column; gap: 48px; }
+  .head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 20px; }
+  .head p { margin: 0; max-width: 380px; font-size: 18px; line-height: 1.5; color: #4a4363; }
+  .studio-row { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 48px; }
+  .fabric-col { flex: 3 1 560px; min-width: 0; position: relative; padding: 14px 6px 10px; }
+  .fabric { transform: rotate(-1.2deg); filter: drop-shadow(0 26px 30px rgba(26,21,48,.28)); }
+  .selvedge { background: #1a1530; color: #ffd23f; font-size: 12px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; padding: 9px 16px; white-space: nowrap; overflow: hidden; }
+  .swatch { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); }
+  .swatch .tile { aspect-ratio: 1; }
+  .zig { display: block; width: 100%; height: 16px; }
+  .label-tag { position: absolute; top: -10px; right: 22px; transform: rotate(6deg); display: flex; flex-direction: column; gap: 2px; background: #fff; border: 3px solid #1a1530; border-radius: 12px; padding: 12px 18px 12px 36px; box-shadow: 4px 5px 0 #1a1530; font-family: 'Syne', system-ui, sans-serif; font-weight: 700; font-size: 15px; line-height: 1.2; }
+  .label-tag::before { content: ''; position: absolute; left: 12px; top: 50%; width: 10px; height: 10px; margin-top: -7px; border-radius: 50%; border: 2px solid #1a1530; background: #fff8ef; }
+  .label-tag small { font-family: 'Figtree', system-ui, sans-serif; font-weight: 600; font-size: 13px; color: #4a4363; }
+
+  .controls { flex: 2 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 32px; }
+  .group { display: flex; flex-direction: column; gap: 14px; }
+  .group-title { margin: 0; font-family: 'Syne', system-ui, sans-serif; font-weight: 700; font-size: 20px; }
+  .motif-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .choice { display: flex; align-items: center; gap: 12px; border-radius: 18px; border: 3px solid #e9dfcf; background: #fff; color: #1a1530; font: 700 16px/1.2 'Figtree', system-ui, sans-serif; text-align: left; cursor: pointer; transition: box-shadow .2s ease, border-color .2s ease; }
+  .choice:hover { border-color: #b9aed3; }
+  .choice[aria-pressed="true"] { border-color: #1a1530; box-shadow: 4px 4px 0 #1a1530; }
+  .motif-btn { min-height: 76px; padding: 10px 12px; }
+  .pv { flex: 0 0 52px; width: 52px; height: 52px; border-radius: 12px; overflow: hidden; }
+  .pal-list { display: flex; flex-direction: column; gap: 10px; }
+  .pal-btn { min-height: 58px; padding: 0 16px; gap: 14px; border-radius: 16px; }
+  .dots { display: flex; }
+  .dots span { width: 24px; height: 24px; border-radius: 50%; box-shadow: inset 0 0 0 2px rgba(26,21,48,.18); }
+  .dots span + span { margin-left: -6px; }
+  .scale-row { display: flex; flex-wrap: wrap; gap: 10px; }
+  .scale-btn { flex: 1 1 96px; display: flex; flex-direction: column; align-items: flex-start; gap: 2px; min-height: 62px; padding: 10px 14px; border-radius: 16px; border: 3px solid #1a1530; background: #fff; color: #1a1530; font-family: 'Figtree', system-ui, sans-serif; text-align: left; cursor: pointer; transition: background-color .2s ease, color .2s ease; }
+  .scale-btn b { font-size: 16px; }
+  .scale-btn small { font-size: 13px; font-weight: 500; }
+  .scale-btn[aria-pressed="true"] { background: #1a1530; color: #fff8ef; }
+  .summary { display: flex; flex-direction: column; gap: 16px; padding: 26px; border-radius: 24px; background: #1a1530; color: #fff8ef; }
+  .summary .kicker { margin: 0; font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #ffd23f; }
+  .summary .name { margin: 0; font-family: 'Syne', system-ui, sans-serif; font-weight: 700; font-size: 26px; line-height: 1.15; }
+  .summary .meta { margin: 4px 0 0; font-size: 15px; color: #cfc7e6; }
+  .summary-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+  .btn-order { flex: 1 1 200px; min-height: 52px; background: #ff4f8b; color: #1a1530; white-space: nowrap; }
+  .btn-shuffle { min-height: 52px; padding: 0 20px; background: transparent; color: #fff8ef; border: 2px solid #fff8ef; font-size: 16px; }
+
+  /* How it works */
+  .how { background: #2340b5; color: #fff8ef; padding: 96px 4vw; }
+  .how-inner { display: flex; flex-direction: column; gap: 48px; }
+  .how .h2 { color: #ffd23f; }
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 28px; }
+  .steps li { display: flex; flex-direction: column; gap: 12px; border-top: 4px solid #ffd23f; padding-top: 22px; }
+  .steps .num { font-family: 'Syne', system-ui, sans-serif; font-weight: 800; font-size: 64px; line-height: 1; color: #ffd23f; }
+  .steps h3 { margin: 0; font-family: 'Syne', system-ui, sans-serif; font-weight: 700; font-size: 28px; }
+  .steps p { margin: 0; font-size: 18px; line-height: 1.5; color: #dfe4ff; }
+
+  .cta { background: #ff4f8b; padding: 88px 4vw; }
+  .cta .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 32px; }
+  .cta p { margin: 0; font-family: 'Syne', system-ui, sans-serif; font-weight: 800; font-size: clamp(44px, 7vw, 100px); line-height: .95; letter-spacing: -.045em; }
+  .cta .btn { min-height: 56px; padding: 0 30px; font-size: 18px; }
+  .footer { background: #1a1530; color: #fff8ef; padding: 28px 4vw; font-size: 14px; }
+  .footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+  .footer a:hover { color: #ffd23f; }
+
+  @media (max-width: 560px) {
+    .studio { padding-top: 72px; }
+    .label-tag { right: 8px; }
+    .ribbon .tile { flex-basis: 72px; height: 72px; }
+    .motif-btn { gap: 10px; padding: 8px 10px; }
+    .pv { flex-basis: 44px; width: 44px; height: 44px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <header class="topbar">
+      <a class="logo" href="#top">
+        <svg aria-hidden="true" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="15" fill="#2340b5"/><circle cx="16" cy="16" r="10" fill="#ff4f8b"/><circle cx="16" cy="16" r="4.5" fill="#ffd23f"/></svg>
+        Wax&amp;Weft
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="#studio">Studio</a>
+        <a href="#how">How it works</a>
+        <a class="btn btn-ink-yellow" href="#studio">Design yours</a>
+      </nav>
+    </header>
+    <div class="hero-row">
+      <h1>Print <span class="hl hl-pink">your own</span><br><span class="hl hl-blue">Ankara.</span></h1>
+      <div class="hero-copy">
+        <p>Pick a motif, choose your colours, and we'll print six yards of fabric that's only yours.</p>
+        <a class="btn btn-ink" href="#studio">Start designing
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="ribbon" id="ribbon" aria-hidden="true"></div>
+</section>
+
+<section class="studio" id="studio" aria-labelledby="studio-title">
+  <div class="wrap studio-inner">
+    <div class="head">
+      <h2 class="h2" id="studio-title">The studio</h2>
+      <p>Every choice repaints the fabric. Can't decide? Hit shuffle and let the cloth surprise you.</p>
+    </div>
+
+    <div class="studio-row">
+      <div class="fabric-col">
+        <div class="fabric">
+          <div class="selvedge" aria-hidden="true">Wax &amp; Weft · Your original print · Six yards · Wax &amp; Weft · Your original print · Six yards · Wax &amp; Weft</div>
+          <div class="swatch" id="swatch" role="img" aria-label="Fabric preview"></div>
+          <svg class="zig" aria-hidden="true" viewBox="0 0 400 16" preserveAspectRatio="none"><path id="zig"/></svg>
+        </div>
+        <div class="label-tag">
+          <span id="tag-motif">Sunburst</span>
+          <small id="tag-pal">Lagos Noon</small>
+        </div>
+      </div>
+
+      <div class="controls">
+        <div class="group" role="group" aria-labelledby="g-motif">
+          <p class="group-title" id="g-motif">1 · Pick a motif</p>
+          <div class="motif-grid">
+            <button type="button" class="choice motif-btn" data-i="0" aria-pressed="true"><span class="pv" aria-hidden="true"></span><span>Sunburst</span></button>
+            <button type="button" class="choice motif-btn" data-i="1" aria-pressed="false"><span class="pv" aria-hidden="true"></span><span>Palm fan</span></button>
+            <button type="button" class="choice motif-btn" data-i="2" aria-pressed="false"><span class="pv" aria-hidden="true"></span><span>Diamond</span></button>
+            <button type="button" class="choice motif-btn" data-i="3" aria-pressed="false"><span class="pv" aria-hidden="true"></span><span>River</span></button>
+          </div>
+        </div>
+
+        <div class="group" role="group" aria-labelledby="g-colour">
+          <p class="group-title" id="g-colour">2 · Choose a colourway</p>
+          <div class="pal-list">
+            <button type="button" class="choice pal-btn" data-i="0" aria-pressed="true"><span class="dots" aria-hidden="true"><span style="background:#ffb703"></span><span style="background:#1b3fa0"></span><span style="background:#e63946"></span><span style="background:#fff3dc"></span></span>Lagos Noon</button>
+            <button type="button" class="choice pal-btn" data-i="1" aria-pressed="false"><span class="dots" aria-hidden="true"><span style="background:#1b2a6b"></span><span style="background:#f4a259"></span><span style="background:#5bc0be"></span><span style="background:#f9f4e8"></span></span>Indigo Market</button>
+            <button type="button" class="choice pal-btn" data-i="2" aria-pressed="false"><span class="dots" aria-hidden="true"><span style="background:#0f5132"></span><span style="background:#f6c90e"></span><span style="background:#ff7b54"></span><span style="background:#fff5e1"></span></span>Palm Wine</button>
+            <button type="button" class="choice pal-btn" data-i="3" aria-pressed="false"><span class="dots" aria-hidden="true"><span style="background:#c2185b"></span><span style="background:#ffd166"></span><span style="background:#3a0ca3"></span><span style="background:#fff0f5"></span></span>Hibiscus</button>
+          </div>
+        </div>
+
+        <div class="group" role="group" aria-labelledby="g-scale">
+          <p class="group-title" id="g-scale">3 · Set the scale</p>
+          <div class="scale-row">
+            <button type="button" class="scale-btn" data-i="0" aria-pressed="false"><b>Small</b><small>Tiny repeat</small></button>
+            <button type="button" class="scale-btn" data-i="1" aria-pressed="true"><b>Medium</b><small>Classic</small></button>
+            <button type="button" class="scale-btn" data-i="2" aria-pressed="false"><b>Bold</b><small>Statement</small></button>
+          </div>
+        </div>
+
+        <div class="summary">
+          <p class="kicker">Your print</p>
+          <div aria-live="polite">
+            <p class="name" id="summary">Sunburst in Lagos Noon</p>
+            <p class="meta" id="summary-sub">Medium scale · 6 yards, printed to order</p>
+          </div>
+          <div class="summary-actions">
+            <button type="button" class="btn btn-order">Order 6 yards — &#8358;55,000</button>
+            <button type="button" class="btn btn-shuffle" id="shuffle">
+              <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5"/><path d="M4 20L21 3"/><path d="M21 16v5h-5"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/></svg>
+              Shuffle
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="how" id="how" aria-labelledby="how-title">
+  <div class="wrap how-inner">
+    <h2 class="h2" id="how-title">From screen to tailor.</h2>
+    <ol class="steps">
+      <li><span class="num">01</span><h3>Design it</h3><p>Play in the studio until the print feels like yours.</p></li>
+      <li><span class="num">02</span><h3>We print it</h3><p>Six yards of [FABRIC] cotton, printed to order and on its way in [TURNAROUND].</p></li>
+      <li><span class="num">03</span><h3>Sew it</h3><p>Take it to your tailor, or turn it into curtains, bags or a very loud tablecloth.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="cta" aria-label="Start designing">
+  <div class="wrap">
+    <p>Your print.<br>Nobody else's.</p>
+    <a class="btn btn-ink-yellow" href="#studio">Start designing</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <span>Wax &amp; Weft is a fictional print studio.</span>
+    <span>Instagram · WhatsApp · TikTok</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var PALETTES = [
+    { name: 'Lagos Noon',    ground: '#ffb703', c1: '#1b3fa0', c2: '#e63946', c3: '#fff3dc' },
+    { name: 'Indigo Market', ground: '#1b2a6b', c1: '#f4a259', c2: '#5bc0be', c3: '#f9f4e8' },
+    { name: 'Palm Wine',     ground: '#0f5132', c1: '#f6c90e', c2: '#ff7b54', c3: '#fff5e1' },
+    { name: 'Hibiscus',      ground: '#c2185b', c1: '#ffd166', c2: '#3a0ca3', c3: '#fff0f5' }
+  ];
+  var MOTIFS = [
+    { key: 'sun', name: 'Sunburst' },
+    { key: 'leaf', name: 'Palm fan' },
+    { key: 'diamond', name: 'Diamond' },
+    { key: 'wave', name: 'River' }
+  ];
+  var SCALES = [
+    { name: 'Small', cols: 10, rows: 7 },
+    { name: 'Medium', cols: 7, rows: 5 },
+    { name: 'Bold', cols: 4, rows: 3 }
+  ];
+  var state = { motif: 0, pal: 0, scale: 1 };
+
+  // The artwork for one 100 x 100 tile. `full` adds the small details used at larger sizes.
+  function motifSVG(key, t, full) {
+    if (key === 'sun') {
+      return '<circle cx="50" cy="50" r="38" fill="' + t.c1 + '"/>' +
+        (full ? '<circle cx="50" cy="50" r="32.5" fill="none" stroke="' + t.c3 + '" stroke-width="3" stroke-dasharray="1 6" stroke-linecap="round"/>' : '') +
+        '<circle cx="50" cy="50" r="27" fill="' + t.c3 + '"/>' +
+        '<circle cx="50" cy="50" r="17" fill="' + t.c2 + '"/>' +
+        '<circle cx="50" cy="50" r="6" fill="' + t.c3 + '"/>' +
+        (full ? '<circle cx="0" cy="0" r="12" fill="' + t.c2 + '"/><circle cx="100" cy="0" r="12" fill="' + t.c2 + '"/>' +
+                '<circle cx="0" cy="100" r="12" fill="' + t.c2 + '"/><circle cx="100" cy="100" r="12" fill="' + t.c2 + '"/>' : '');
+    }
+    if (key === 'leaf') {
+      return '<path d="M0 100 C 2 70, 15 40, 36 8 C 42 46, 26 80, 0 100 Z" fill="' + t.c3 + '"/>' +
+        '<path d="M0 100 C 10 60, 40 30, 82 20 C 72 60, 42 90, 0 100 Z" fill="' + t.c1 + '"/>' +
+        '<path d="M0 100 C 30 80, 60 70, 100 76 C 70 96, 32 102, 0 100 Z" fill="' + t.c2 + '"/>' +
+        (full ? '<path d="M0 100 C 30 70, 52 44, 82 20" fill="none" stroke="' + t.c3 + '" stroke-width="2.5"/>' +
+                '<path d="M0 100 C 40 86, 70 78, 100 76" fill="none" stroke="' + t.c3 + '" stroke-width="2.5"/>' +
+                '<circle cx="80" cy="44" r="5" fill="' + t.c3 + '"/><circle cx="92" cy="30" r="3" fill="' + t.c3 + '"/>' : '');
+    }
+    if (key === 'diamond') {
+      return '<path d="M50 6 L94 50 L50 94 L6 50 Z" fill="' + t.c1 + '"/>' +
+        '<path d="M50 22 L78 50 L50 78 L22 50 Z" fill="' + t.c3 + '"/>' +
+        '<path d="M50 34 L66 50 L50 66 L34 50 Z" fill="' + t.c2 + '"/>' +
+        (full ? '<path d="M0 0 L20 0 L0 20 Z M100 0 L80 0 L100 20 Z M0 100 L20 100 L0 80 Z M100 100 L80 100 L100 80 Z" fill="' + t.c2 + '"/>' +
+                '<circle cx="50" cy="50" r="4" fill="' + t.c3 + '"/>' : '');
+    }
+    return '<path d="M0 22 C 25 2, 50 42, 75 22 C 88 12, 95 14, 100 22 L 100 42 C 95 34, 88 32, 75 42 C 50 62, 25 22, 0 42 Z" fill="' + t.c1 + '"/>' +
+      '<path d="M0 64 C 25 44, 50 84, 75 64 C 88 54, 95 56, 100 64 L 100 84 C 95 76, 88 74, 75 84 C 50 104, 25 64, 0 84 Z" fill="' + t.c2 + '"/>' +
+      (full ? '<circle cx="50" cy="57" r="4" fill="' + t.c3 + '"/><circle cx="12" cy="47" r="3.5" fill="' + t.c3 + '"/>' +
+              '<circle cx="88" cy="46" r="3.5" fill="' + t.c3 + '"/><circle cx="50" cy="10" r="3" fill="' + t.c3 + '"/>' : '');
+  }
+
+  // Colours and rotation for the tile at row r, column c, so the repeat looks woven, not stamped.
+  function tileFor(r, c, key, p) {
+    var odd = (r + c) % 2 === 1;
+    var t = { ground: p.ground, c1: p.c1, c2: p.c2, c3: p.c3, rot: 0 };
+    if ((key === 'sun' || key === 'diamond') && odd) { t.c1 = p.c2; t.c2 = p.c1; }
+    if (key === 'leaf') t.rot = [[270, 0], [180, 90]][r % 2][c % 2];
+    if (key === 'wave' && r % 2 === 1) t.rot = 180;
+    return t;
+  }
+
+  function tileHTML(t, key) {
+    return '<div class="tile" style="--g:' + t.ground + ';--r:' + t.rot + 'deg"><svg viewBox="0 0 100 100">' + motifSVG(key, t, true) + '</svg></div>';
+  }
+
+  var swatch = document.getElementById('swatch');
+  var ribbon = document.getElementById('ribbon');
+  var zig = document.getElementById('zig');
+  var motifBtns = document.querySelectorAll('.motif-btn');
+  var palBtns = document.querySelectorAll('.pal-btn');
+  var scaleBtns = document.querySelectorAll('.scale-btn');
+
+  // Pinked (zig-zag) bottom edge of the fabric.
+  var d = 'M0 0 L400 0';
+  for (var x = 400; x > 0; x -= 10) d += ' L' + (x - 5) + ' 16 L' + (x - 10) + ' 0';
+  zig.setAttribute('d', d + ' Z');
+
+  function render() {
+    var pal = PALETTES[state.pal];
+    var motif = MOTIFS[state.motif];
+    var scale = SCALES[state.scale];
+    var html = '';
+    for (var r = 0; r < scale.rows; r++) {
+      for (var c = 0; c < scale.cols; c++) html += tileHTML(tileFor(r, c, motif.key, pal), motif.key);
+    }
+    swatch.style.gridTemplateColumns = 'repeat(' + scale.cols + ', minmax(0, 1fr))';
+    swatch.style.background = pal.ground;
+    swatch.innerHTML = html;
+    swatch.setAttribute('aria-label', 'Fabric preview: ' + motif.name + ' motif in the ' + pal.name + ' colourway, ' + scale.name.toLowerCase() + ' scale');
+
+    var strip = '';
+    for (var k = 0; k < 20; k++) strip += tileHTML(tileFor(0, k, motif.key, pal), motif.key);
+    ribbon.innerHTML = strip;
+    ribbon.style.background = pal.ground;
+
+    zig.setAttribute('fill', pal.ground);
+
+    for (var i = 0; i < motifBtns.length; i++) {
+      var m = MOTIFS[i];
+      var t = tileFor(0, 0, m.key, pal);
+      var pv = motifBtns[i].querySelector('.pv');
+      pv.style.background = t.ground;
+      pv.style.transform = 'rotate(' + t.rot + 'deg)';
+      pv.innerHTML = '<svg viewBox="0 0 100 100">' + motifSVG(m.key, t, false) + '</svg>';
+      motifBtns[i].setAttribute('aria-pressed', String(i === state.motif));
+    }
+    for (var j = 0; j < palBtns.length; j++) palBtns[j].setAttribute('aria-pressed', String(j === state.pal));
+    for (var s = 0; s < scaleBtns.length; s++) scaleBtns[s].setAttribute('aria-pressed', String(s === state.scale));
+
+    document.getElementById('tag-motif').textContent = motif.name;
+    document.getElementById('tag-pal').textContent = pal.name;
+    document.getElementById('summary').textContent = motif.name + ' in ' + pal.name;
+    document.getElementById('summary-sub').textContent = scale.name + ' scale · 6 yards, printed to order';
+  }
+
+  function bind(list, field) {
+    for (var i = 0; i < list.length; i++) {
+      list[i].addEventListener('click', function () {
+        state[field] = Number(this.getAttribute('data-i'));
+        render();
+      });
+    }
+  }
+  bind(motifBtns, 'motif');
+  bind(palBtns, 'pal');
+  bind(scaleBtns, 'scale');
+
+  function pickOther(n, current) {
+    var v = Math.floor(Math.random() * n);
+    return v === current ? (v + 1) % n : v;
+  }
+  document.getElementById('shuffle').addEventListener('click', function () {
+    state.motif = pickOther(MOTIFS.length, state.motif);
+    state.pal = pickOther(PALETTES.length, state.pal);
+    state.scale = Math.floor(Math.random() * SCALES.length);
+    render();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
